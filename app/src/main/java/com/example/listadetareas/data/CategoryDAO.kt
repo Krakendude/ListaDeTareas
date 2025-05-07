@@ -38,7 +38,7 @@ class CategoryDAO(private val context: Context) {
         }
     }
 
-    //actualizar
+    // Actualizar
     fun update(category: Category) {
         open()
 
@@ -60,24 +60,22 @@ class CategoryDAO(private val context: Context) {
         }
     }
 
-    //borrar
-    fun delete (category: Category){
-        fun delete(category: Category) {
-            open()
+    // Borrar
+    fun delete(category: Category) {
+        open()
 
-            try {
-                // Define 'where' part of query.
-                val selection = "${Category.COLUMN_NAME_ID} = ${category.id}"
+        try {
+            // Define 'where' part of query.
+            val selection = "${Category.COLUMN_NAME_ID} = ${category.id}"
 
-                // Issue SQL statement.
-                val deletedRows = db.delete(Category.TABLE_NAME, selection, null)
+            // Issue SQL statement.
+            val deletedRows = db.delete(Category.TABLE_NAME, selection, null)
 
-                Log.i("DATABASE", "Deleted category with id: ${category.id}")
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                close()
-            }
+            Log.i("DATABASE", "Deleted category with id: ${category.id}")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            close()
         }
     }
 
