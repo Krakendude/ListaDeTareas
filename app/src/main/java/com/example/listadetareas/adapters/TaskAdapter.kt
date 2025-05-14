@@ -1,6 +1,7 @@
 package com.example.listadetareas.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -11,6 +12,7 @@ class TaskAdapter(
     var items: List<Task>,
     val onItemClick: (position: Int) -> Unit,
     val onItemCheck: (position: Int) -> Unit,
+    val onItemMenu: (position: Int, v: View) -> Unit,
 ): Adapter<TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -29,7 +31,12 @@ class TaskAdapter(
             onItemClick(position)
         }
         holder.binding.doneCheckbox.setOnCheckedChangeListener { compoundButton, b ->
-            onItemCheck(position)
+            if (holder.binding.doneCheckbox.isPressed) {
+                onItemCheck(position)
+            }
+        }
+        holder.binding.menuButton.setOnClickListener { view ->
+            onItemMenu (position, view)
         }
     }
 
